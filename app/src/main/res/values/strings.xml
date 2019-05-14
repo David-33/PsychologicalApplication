@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Psychotherapeutic Application</string>
+
+    <string name="menu_text_en">The secret of technology is that
+        if you want to get a scrap out of the ground, then you need to shake it to pull it out.
+        The same technology works in our program.</string>
+
+    <string name="menu_text_ru">Секрет технологии в том, что если Вы хотите вытащить
+        лом из земли, то нужно его раскачать чтобы его вытащить.
+        Эта же технология работает в нашей программе.</string>
+
+    <string name="info_text_en">This is Psychotherapeutic Game which will help you
+        return your lost energy and become more confident and relaxed</string>
+
+    <string name="info_text_ru">Вас приветствует психотерапевтическая игра, которая поможет вам
+        вернуть утраченную энергию и стать более уверенным и расслабленным</string>
+
+    <string name="start_button_text_en">Start</string>
+
+    <string name="start_button_text_ru">Начать</string>
+
+    <string name="negative_text_ru">Вспомните самый плохой день в Вашей жизни,
+        который не хотели бы вспоминать</string>
+
+    <string name="positive_text_ru">Вспомните самый хороший момент в Вашей жизни</string>
+
+    <string name="emotion_text_ru">Какую эмоцию Вы чувствовали в этот момент?</string>
+
+    <string name="state_text_ru">Оцените Ваше состояние, насколько Вам хорошо в этот момент, по трем пунктам
+        \n(0- расслаб. | 10 - напряж.):</string>
+    <string name="head_state_text_ru">1) Оцените состояние головы:</string>
+    <string name="heart_state_text_ru">2) Оцените состояние сердца:</string>
+    <string name="body_state_text_ru">3) Оцените состояние тела:</string>
+    <string name="switch_first_text_ru">А теперь вспомните хорошее…</string>
+    <string name="switch_happy_text_ru">А теперь вернемся к плохому…</string>
+    <string name="switch_sad_text_ru">А теперь вернемся к хорошему…</string>
+    <string name="info_text">Результат: негативная сторона и позитивная могут
+        быть оба нейтральными или позитив может остаться, а нег сторона онулироваться.
+        А если нег стор не онилируется, тогда выбирете более ранний инцендент похожий на данный,
+        а позитивная сорона какое пожелаете</string>
+    <string name="completed">Мы Вас поздб нег блок потерял силу и в будущем не будет у Вас высасывать энергию
+    в дальнейшем, таким образом, пользуясь этим приложением, вы можете все нег из Вашего прошлого нейтрализовать и в будующемстать
+    удачливым  сильным здоровым человеком</string>
+
+    <string-array name="negative_spinner_items_en">
+        <item>fear</item>
+        <item>angriness</item>
+        <item>shame</item>
+        <item>blame</item>
+        <item>disappointment</item>
+        <item>obsessive thoughts</item>
+        <item>fatigue</item>
+    </string-array>
+
+    <string-array name="negative_spinner_items_ru">
+        <item>страх</item>
+        <item>злость</item>
+        <item>позор</item>
+        <item>вина</item>
+        <item>разочарование</item>
+        <item>навязчивые мысли</item>
+        <item>усталость</item>
+    </string-array>
+
+    <string-array name="positive_spinner_items_en">
+        <item>love</item>
+        <item>happiness</item>
+        <item>energy</item>
+        <item>optimism</item>
+        <item>generosity</item>
+        <item>trust</item>
+        <item>courage</item>
+        <item>self satisfaction</item>
+    </string-array>
+
+    <string-array name="positive_spinner_items_ru">
+        <item>любовь</item>
+        <item>счастье</item>
+        <item>энергия</item>
+        <item>оптимизм</item>
+        <item>радость</item>
+        <item>доверие</item>
+        <item>мужество</item>
+        <item>самоудовлетворение</item>
+    </string-array>
+
+</resources>

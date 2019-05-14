@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/menuBgColor">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="380dp"
+        android:layout_height="232dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/crowbar"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="380dp"
+        android:layout_height="0dp"
+        android:layout_above="@id/bottomLayout"
+        android:layout_below="@id/logoImageView"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/menu_text_ru"
+        android:textColor="@color/textColor"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
+    <RelativeLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/infoButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@id/startButton"
+            android:layout_marginEnd="15dp"
+            android:layout_toStartOf="@id/startButton"
+            android:background="@drawable/info_button" />
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="210dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/start_button"
+            android:paddingBottom="10dp"
+            android:text="@string/start_button_text_ru"
+            android:textAllCaps="false"
+            android:textColor="@color/menuButtonsTextColor"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@id/startButton"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/startButton"
+            android:background="@drawable/settings_button" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
