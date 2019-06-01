@@ -18,11 +18,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.psychotherapeutic_app.R;
 import com.psychotherapeutic_app.adapters.StatePagerAdapter;
 import com.psychotherapeutic_app.utils.SizeUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener, View.OnTouchListener {
@@ -32,7 +34,8 @@ public class MainActivity extends AppCompatActivity
     };
 
     private ArrayAdapter<String> mAdapterForEmotions;
-    private ArrayAdapter<String> mAdapterForNumbers;
+    private int[] mSadStates = new int[4];
+    private int[] mHappyStates = new int[4];
 
     private RelativeLayout mMainLayout;
 
@@ -84,18 +87,18 @@ public class MainActivity extends AppCompatActivity
         final String[] emotionSpinnerItems = getResources().getStringArray(R.array.negative_spinner_items_ru);
 
         mAdapterForEmotions = new ArrayAdapter<>(this,
-                R.layout.spinner_item, emotionSpinnerItems);
+                R.layout.spinner_item, new ArrayList<>(Arrays.asList(emotionSpinnerItems)));
 
-        mAdapterForNumbers = new ArrayAdapter<>(this,
+        ArrayAdapter<String> adapterForNumbers = new ArrayAdapter<>(this,
                 R.layout.spinner_item, sNumbers);
 
         mAdapterForEmotions.setDropDownViewResource(R.layout.spinner_item);
-        mAdapterForNumbers.setDropDownViewResource(R.layout.spinner_item);
+        adapterForNumbers.setDropDownViewResource(R.layout.spinner_item);
 
         mEmotionSpinner.setAdapter(mAdapterForEmotions);
-        mHeadSpinner.setAdapter(mAdapterForNumbers);
-        mHeartSpinner.setAdapter(mAdapterForNumbers);
-        mBodySpinner.setAdapter(mAdapterForNumbers);
+        mHeadSpinner.setAdapter(adapterForNumbers);
+        mHeartSpinner.setAdapter(adapterForNumbers);
+        mBodySpinner.setAdapter(adapterForNumbers);
 
         mSwitchButton.setOnTouchListener(this);
         adjust();
@@ -154,11 +157,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.switchButton:
-                isHappyState = !isHappyState;
-                switchState();
-                break;
+        if (view.getId() == R.id.switchButton) {
+            switchState();
         }
     }
 
@@ -168,9 +168,9 @@ public class MainActivity extends AppCompatActivity
         if (windowManager == null) return;
         SizeUtil.initScreenSize(getWindowManager());
 
-        final float textSize20 = SizeUtil.getTextSize(windowManager, 18);
-        final float textSize22 = SizeUtil.getTextSize(windowManager, 20);
-        final float textSize24 = SizeUtil.getTextSize(windowManager, 22);
+        final float textSize18 = SizeUtil.getTextSize(windowManager, 18);
+        final float textSize20 = SizeUtil.getTextSize(windowManager, 20);
+        final float textSize22 = SizeUtil.getTextSize(windowManager, 22);
 
         ViewGroup.LayoutParams maskLayoutParams = findViewById(R.id.maskLayout).getLayoutParams();
         RelativeLayout.LayoutParams maskImageViewParams =
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity
                 (int) (0.167 * maskImageViewParams.width);
 
         maskTextViewParams.leftMargin = (int) (-0.25 * maskImageViewParams.width);
-        mMaskTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize24);
+        mMaskTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize22);
 
         emotionLayoutParams.height = SizeUtil.relativeH(16.43);
 
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity
                 (int) (0.084 * maskImageViewParams.width),
                 0
         );
-        mEmotionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize24);
+        mEmotionTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize22);
 
         emotionImageViewParams.width = (int) (0.767 * maskImageViewParams.width);
         emotionImageViewParams.height = (int) (1.087 * emotionImageViewParams.width);
@@ -222,51 +222,69 @@ public class MainActivity extends AppCompatActivity
         emotionSpinnerParams.leftMargin = (int) (0.074 * emotionSpinnerParams.width);
 
         stateTextViewParams.height = SizeUtil.relativeH(19);
-        mStateTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize22);
+        mStateTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize20);
+
         statesLayoutParams.height = SizeUtil.relativeH(21);
 
-        mHeadTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize20);
-        mHeartTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize20);
-        mBodyTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize20);
+        mHeadTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize18);
+        mHeartTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize18);
+        mBodyTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize18);
 
         headSpinnerParams.width = heartSpinnerParams.width = bodySpinnerParams.width =
                 SizeUtil.relativeW(28);
 
-        mSwitchTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize20);
+        mSwitchTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize18);
 
         switchButtonParams.width = switchButtonParams.height = SizeUtil.relativeW(12.14);
         switchButtonParams.rightMargin = (int) (0.4 * switchButtonParams.width);
     }
 
     private void switchState() {
-        String[] emotionSpinnerItems;
+        isHappyState = !isHappyState;
+
+        mAdapterForEmotions.clear();
+        mAdapterForEmotions.addAll(getResources().getStringArray(isHappyState ?
+                R.array.positive_spinner_items_ru : R.array.negative_spinner_items_ru));
+        mAdapterForEmotions.notifyDataSetChanged();
+
         if (isHappyState) {
             int res = mHeadSpinner.getSelectedItemPosition()
                     + mHeartSpinner.getSelectedItemPosition()
                     + mBodySpinner.getSelectedItemPosition();
             if (res <= 6) {
-                Toast.makeText(this, "Вы прошли тест!", Toast.LENGTH_LONG).show();
+                // TODO: 5/15/19 completed state
             }
 
-            emotionSpinnerItems = getResources().getStringArray(R.array.positive_spinner_items_ru);
             mMainLayout.setBackgroundResource(R.color.happyBgColor);
             mMaskImageView.setBackgroundResource(R.drawable.mask_happy);
             mMaskTextView.setText(getString(R.string.positive_text_ru));
             mSwitchButton.setBackgroundResource(R.drawable.arrow_left);
             mSwitchTextView.setText(getString(R.string.switch_happy_text_ru));
+
+            mSadStates[0] = mEmotionSpinner.getSelectedItemPosition();
+            mSadStates[1] = mHeadSpinner.getSelectedItemPosition();
+            mSadStates[2] = mHeartSpinner.getSelectedItemPosition();
+            mSadStates[3] = mBodySpinner.getSelectedItemPosition();
+            mEmotionSpinner.setSelection(mHappyStates[0]);
+            mHeadSpinner.setSelection(mHappyStates[1]);
+            mHeartSpinner.setSelection(mHappyStates[2]);
+            mBodySpinner.setSelection(mHappyStates[3]);
         } else {
-            emotionSpinnerItems = getResources().getStringArray(R.array.negative_spinner_items_ru);
             mMainLayout.setBackgroundResource(R.color.sadBgColor);
             mMaskImageView.setBackgroundResource(R.drawable.mask_sad);
             mMaskTextView.setText(getString(R.string.negative_text_ru));
             mSwitchButton.setBackgroundResource(R.drawable.arrow_right);
             mSwitchTextView.setText(getString(R.string.switch_sad_text_ru));
-        }
 
-        mAdapterForEmotions = new ArrayAdapter<>(this,
-                R.layout.spinner_item, emotionSpinnerItems);
-        mAdapterForEmotions.setDropDownViewResource(R.layout.spinner_item);
-        mEmotionSpinner.setAdapter(mAdapterForEmotions);
+            mHappyStates[0] = mEmotionSpinner.getSelectedItemPosition();
+            mHappyStates[1] = mHeadSpinner.getSelectedItemPosition();
+            mHappyStates[2] = mHeartSpinner.getSelectedItemPosition();
+            mHappyStates[3] = mBodySpinner.getSelectedItemPosition();
+            mEmotionSpinner.setSelection(mSadStates[0]);
+            mHeadSpinner.setSelection(mSadStates[1]);
+            mHeartSpinner.setSelection(mSadStates[2]);
+            mBodySpinner.setSelection(mSadStates[3]);
+        }
     }
 
 }
