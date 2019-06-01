@@ -3,6 +3,7 @@ package com.psychotherapeutic_app.activities;
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.psychotherapeutic_app.R;
+import com.psychotherapeutic_app.adapters.StatePagerAdapter;
 import com.psychotherapeutic_app.utils.SizeUtil;
 
 public class MainActivity extends AppCompatActivity
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity
 
     private boolean isHappyState = false;
 
+    private ViewPager mPager;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity
         mHeartTextView = findViewById(R.id.heartStateTextView);
         mBodyTextView = findViewById(R.id.bodyStateTextView);
         mSwitchTextView = findViewById(R.id.switchTextView);
+        mPager = findViewById(R.id.pager);
 
         final String[] emotionSpinnerItems = getResources().getStringArray(R.array.negative_spinner_items_ru);
 
@@ -189,7 +193,6 @@ public class MainActivity extends AppCompatActivity
         RelativeLayout.LayoutParams switchButtonParams =
                 (RelativeLayout.LayoutParams) mSwitchButton.getLayoutParams();
 
-
         maskLayoutParams.height = SizeUtil.relativeH(20);
 
         maskImageViewParams.width = SizeUtil.relativeW(29);
@@ -220,7 +223,6 @@ public class MainActivity extends AppCompatActivity
 
         stateTextViewParams.height = SizeUtil.relativeH(19);
         mStateTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize22);
-
         statesLayoutParams.height = SizeUtil.relativeH(21);
 
         mHeadTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize20);
